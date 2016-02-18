@@ -14,6 +14,9 @@ cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
 }
 
+
+## This function determines the inverse of a matrix and caches it in a list for 
+## future use. 
 makeCacheMatrix <- function(x = matrix()) {
         gin <- NULL
         set <- function(y) {
@@ -29,7 +32,11 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## Returns a matrix that is the inverse of 'x'
+
+## This function determines if the inverse of the matrix has already been 
+## determined, if not, then it determines the inverse of the matrix and palces 
+## the result in the cache via the setgin function.
 
 cacheSolve <- function(x, ...) {
         makeCacheMatrix(gin)
