@@ -39,14 +39,19 @@ makeCacheMatrix <- function(x = matrix()) {
 ## the result in the cache via the setgin function.
 
 cacheSolve <- function(x, ...) {
-        makeCacheMatrix(gin)
         gin <- x$getgin()
         if(!is.null(gin)) {
                 message("getting cached data")
                 return(gin)
         }
         data <- x$get()
-        gin <- gin(data, ...)
-        x$setmean(gin)
+        gin <- ginv(data, ...)
+        x$setgin(gin)
         gin
 }
+
+library(MASS)
+m=matrix(c(1,2,3,4),2,2)
+ginv(m)
+move=makeCacheMatrix(m)
+cacheSolve(move)
