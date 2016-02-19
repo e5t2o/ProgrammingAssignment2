@@ -1,57 +1,44 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
-}
-
-
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-}
-
-
+## 
 ## This function determines the inverse of a matrix and caches it in a list for 
 ## future use. 
 makeCacheMatrix <- function(x = matrix()) {
-        gin <- NULL
+        inv <- NULL
         set <- function(y) {
                 x <<- y
-                gin <<- NULL
+                inv <<- NULL
         }
         get <- function() x
-        setgin <- function(ginv) gin <<- ginv
-        getgin <- function() gin
+        setinv <- function(solve) inv <<- solve
+        getinv <- function() inv
         list(set = set, get = get,
-             setgin = setgin,
-             getgin = getgin)
+             setinv = setinv,
+             getinv = getinv)
 }
 
 
 ## Returns a matrix that is the inverse of 'x'
 
 ## This function determines if the inverse of the matrix has already been 
-## determined, if not, then it determines the inverse of the matrix and palces 
-## the result in the cache via the setgin function.
+## determined, if not, then it determines the inverse of the matrix and places 
+## the result in the cache via the setgin function and then prints the inverted 
+##matrix.
 
 cacheSolve <- function(x, ...) {
-        gin <- x$getgin()
-        if(!is.null(gin)) {
+        inv <- x$getinv()
+        if(!is.null(inv)) {
                 message("getting cached data")
-                return(gin)
+                return(inv)
         }
         data <- x$get()
-        gin <- ginv(data, ...)
-        x$setgin(gin)
-        gin
+        inv <- solve(data, ...)
+        x$setinv(inv)
+        inv
 }
 
+##Below is a short test of the function comparing the results of 'solve' 
+##function to the results of the above functions. 
 library(MASS)
 m=matrix(c(1,2,3,4),2,2)
-ginv(m)
+solve(m)
 move=makeCacheMatrix(m)
 cacheSolve(move)
